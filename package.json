@@ -7,8 +7,7 @@
     "> 0%"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "sass": "node-sass src/sass -o src/css/"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Oleksandr Khanenko",
   "license": "ISC",
@@ -26,8 +25,11 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^0.28.8",
+    "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.6",
+    "node-sass": "^4.7.2",
     "postcss-loader": "^2.0.10",
+    "sass-loader": "^6.0.7",
     "style-loader": "^0.19.1",
     "url-loader": "^0.6.2",
     "webpack": "^3.10.0"

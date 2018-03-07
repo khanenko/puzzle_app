@@ -2,9 +2,11 @@ import React from 'react';
 
 export default class Cell extends React.Component {
     render() {
-        const cls = this.props.value === 0 ? 'square zero' : 'square';
+        const {value} = this.props;
+        const cls = value == 0 ? 'empty cell' : 'cell';
+        const number = value == 0 ? '' : value;
         return (
-            <span className={cls}>{this.props.value + '*'}</span>
+            <div className={cls}><div className="inner">{number}</div></div>
         );
     }
 }

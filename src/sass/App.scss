@@ -1,0 +1,65 @@
+@import "Board";
+
+
+body {
+  margin: 0;
+}
+#puzzle {
+  width: 50%;
+  margin: 0 auto;
+  padding-top: 20px;
+  position: relative;
+}
+
+#win {
+  position: absolute;
+  width: 70%;
+  background: rgba(0, 0, 0, .5);
+  :before {
+    content: "";
+    float: left;
+    padding-top: 100%;
+    display: inline-table;
+  }
+  #win_inner {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f7f6e1;
+    text-shadow: 2px 1px 4px black;
+    font-size: 4.5em;
+  }
+}
+
+.shuffle, .board-size {
+  margin: 3% auto;
+  width: 20%;
+  float: right;
+}
+
+@media only screen and (max-width: 992px) {
+  #puzzle {
+    width: 65%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #puzzle {
+    width: 85%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #puzzle {
+    width: 90%;
+  }
+  #board, #win {
+    width: 100%;
+  }
+  .shuffle, .board-size {
+    margin: 8% 10% 0 0;
+    width: 35%;
+    float: left;
+  }
+}

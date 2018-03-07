@@ -1,0 +1,19 @@
+.shuffle {
+  border-radius: 6px;
+  box-shadow: 1px 1px 3px #666666;
+  color: #ffffff;
+  font-size: 19px;
+  background: #460064;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  outline: none;
+  :hover {
+    box-shadow: 3px 3px 8px #666666;
+    background: #61007c;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  :active {
+    box-shadow: inset 1px 1px 10px black;
+  }
+}

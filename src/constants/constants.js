@@ -11,3 +11,5 @@ export const KEY_DIRECTION = {
     39: RIGHT_DIRECTION,
     40: DOWN_DIRECTION
 };
+
+export const GREETINGS_TEXT = 'You WIN';
