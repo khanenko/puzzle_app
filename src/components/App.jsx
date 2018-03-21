@@ -6,6 +6,7 @@ import {
     GREETINGS_TEXT
 } from '../constants/constants';
 import {moveItem} from '../utils/navigationUtils';
+import {createBoard, compareRandom, maybeYouWin, congratulate} from '../utils/utils';
 import Board from './Board.jsx';
 
 export default class App extends React.Component {
@@ -28,7 +29,7 @@ export default class App extends React.Component {
     }
 
     componentWillUpdate() {
-        const winElement = document.getElementById("win_inner");
+        const winElement = this._winElement;
         if(winElement) {
             congratulate(winElement, GREETINGS_TEXT);
         }
@@ -40,15 +41,15 @@ export default class App extends React.Component {
     };
 
     handleKeyDown = event => {
-        const {isStarted, isFinished} = this.state;
-        if(!isStarted || isFinished) return;
+        const {isFinished, isStarted} = this.state;
+        if(isFinished) return;
         const direction = KEY_DIRECTION[event.keyCode];
         if(!direction) return;
 
         const {board, rowSize} = this.state;
-        const zeroIndex = board.indexOf(0);
+        const zeroIndex = board.indexOf(board.find(item => item.value == 0));
         moveItem(board, direction, zeroIndex, rowSize);
-        if(maybeYouWin(board)) {
+        if(isStarted && maybeYouWin(board)) {
             this.setState({isFinished: true});
         }
         this.setState({board: board});
@@ -65,9 +66,9 @@ export default class App extends React.Component {
         const {board, rowSize, isFinished} = this.state;
         
         return (
-            <div id='puzzle'>
+            <div className='puzzle'>
                 <Board board={board} rowSize={rowSize}/>
-                {isFinished ? <div id="win"><p id="win_inner"/></div> : null}
+                {isFinished ? <div className="win"><p className="win_inner" ref={(node) => { this._winElement = node; }}/></div> : null}
                 <input type="range"
                        className="board-size"
                        min={3}
@@ -81,39 +82,3 @@ export default class App extends React.Component {
         );
     }
 }
-
-const compareRandom = (a, b) => {
-    return Math.random() - 0.5;
-};
-
-const createBoard = size => {
-    let board = new Array(size * size);
-    for (let i = 0; i < size * size;) board[i] = ++i;
-    board[size * size - 1] = 0;
-
-    return board;
-};
-
-const maybeYouWin = board => {
-    return board.every((item, index, board) => {
-        if (index == board.length - 1) {
-            return true;
-        }
-
-        return item == index + 1;
-    });
-};
-
-const congratulate = (winElement, greetings) => {
-    let i = 0;
-    let id = setInterval(frame, 50);
-
-    function frame() {
-        if (i > greetings.length - 1) {
-            clearInterval(id);
-        } else {
-            winElement.innerHTML += greetings[i];
-            i++;
-        }
-    }
-};

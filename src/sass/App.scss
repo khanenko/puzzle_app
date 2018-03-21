@@ -1,65 +1,59 @@
 @import "Board";
+@import url('https://fonts.googleapis.com/css?family=Courgette');
 
-
-body {
-  margin: 0;
-}
-#puzzle {
-  width: 50%;
-  margin: 0 auto;
-  padding-top: 20px;
-  position: relative;
-}
-
-#win {
-  position: absolute;
-  width: 70%;
-  background: rgba(0, 0, 0, .5);
-  :before {
-    content: "";
-    float: left;
-    padding-top: 100%;
-    display: inline-table;
-  }
-  #win_inner {
+html {
+  height: 100%;
+  body {
     margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #f7f6e1;
-    text-shadow: 2px 1px 4px black;
-    font-size: 4.5em;
+    height: 100%;
   }
 }
-
-.shuffle, .board-size {
-  margin: 3% auto;
-  width: 20%;
-  float: right;
-}
-
-@media only screen and (max-width: 992px) {
-  #puzzle {
-    width: 65%;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  #puzzle {
-    width: 85%;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  #puzzle {
-    width: 90%;
-  }
-  #board, #win {
-    width: 100%;
-  }
-  .shuffle, .board-size {
-    margin: 8% 10% 0 0;
-    width: 35%;
-    float: left;
+.app {
+  @include center-align;
+  min-height: 100%;
+  .puzzle {
+    width: 50%;
+    margin: 20px auto;
+    position: relative;
+    @include control-panel(3% auto, 25%, right);
+    .win {
+      position: absolute;
+      width: 70%;
+      background: $win-background;
+      @include make-square;
+    }
+    .win_inner {
+      color: $winText-color;
+      text-shadow: $winText-shadow;
+      font: {
+        family: 'Courgette', cursive;;
+        size: 4.5em;
+      }
+      @include verticalCenter-position;
+    }
+    @media only screen {
+      @media (max-width: 992px) {
+        width: 60%;
+        .win_inner {
+          font-size: 4em;
+        }
+      }
+      @media (max-width: 768px) {
+        width: 70%;
+        .win_inner {
+          font-size: 3em;
+        }
+      }
+      @media (max-width: 480px) {
+        width: 90%;
+        .board, .win {
+          width: 100%;
+        }
+        .shuffle {
+          padding: 0;
+        }
+        @include control-panel(8% 10% 0 0, 35%, left, 50px);
+      }
+    }
   }
 }
